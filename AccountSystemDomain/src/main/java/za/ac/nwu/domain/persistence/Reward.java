@@ -16,6 +16,13 @@ public class Reward implements Serializable{
     private String rewardName;
     private long mileCost;
 
+    public Reward(Set<MemberAccountTransaction> memberAccountTransactions, long rewardId, String rewardName, long mileCost) {
+        this.memberAccountTransactions = memberAccountTransactions;
+        this.rewardId = rewardId;
+        this.rewardName = rewardName;
+        this.mileCost = mileCost;
+    }
+
     //region Accessor
     @Id
     @Column(name="RewardId")

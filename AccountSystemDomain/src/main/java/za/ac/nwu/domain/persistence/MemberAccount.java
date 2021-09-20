@@ -16,6 +16,13 @@ public class MemberAccount implements Serializable{
     private long milesBalance;
     private Set<MemberAccountTransaction> memberAccountTransactions;
 
+    public MemberAccount(long accountId, Member memberId, long milesBalance, Set<MemberAccountTransaction> memberAccountTransactions) {
+        this.accountId = accountId;
+        this.memberId = memberId;
+        this.milesBalance = milesBalance;
+        this.memberAccountTransactions = memberAccountTransactions;
+    }
+
     //region Accessor
     @Id
     @Column(name="AccountId")

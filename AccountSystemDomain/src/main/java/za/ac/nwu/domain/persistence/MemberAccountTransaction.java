@@ -16,6 +16,13 @@ public class MemberAccountTransaction implements Serializable{
     private Reward rewardId;
     private LocalDate transactionDate;
 
+    public MemberAccountTransaction(long transactionId, MemberAccount accountId, Reward rewardId, LocalDate transactionDate) {
+        this.transactionId = transactionId;
+        this.accountId = accountId;
+        this.rewardId = rewardId;
+        this.transactionDate = transactionDate;
+    }
+
     //region Accessor
     @Id
     @Column(name="TransactionId")

@@ -10,25 +10,29 @@ public class Currency implements Serializable{
     private static final long serialVersionUID = 5041405714629704573L;
 
     @Id
-    @Column(name="CurrencyId")
     private long currencyId;
-
-    @Column(name="CurrencyName")
     private String currencyName;
-
-    @Column(name="MilesConv")
     private long milesConv;
 
-    //region Accessors
+    public Currency(long currencyId, String currencyName, long milesConv) {
+        this.currencyId = currencyId;
+        this.currencyName = currencyName;
+        this.milesConv = milesConv;
+    }
 
+//region Accessors
+
+    @Column(name="MilesConv")
     public long getCurrencyId() {
         return currencyId;
     }
 
+    @Column(name="CurrencyName")
     public String getCurrencyName() {
         return currencyName;
     }
 
+    @Column(name="CurrencyId")
     public long getMilesConv() {
         return milesConv;
     }
