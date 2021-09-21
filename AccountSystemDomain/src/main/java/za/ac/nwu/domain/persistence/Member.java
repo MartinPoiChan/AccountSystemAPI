@@ -3,6 +3,7 @@ package za.ac.nwu.domain.persistence;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.Objects;
 import java.util.Set;
 
 @Entity
@@ -85,4 +86,18 @@ public class Member implements Serializable {
         this.memberAccount = memberAccount;
     }
     //endregion
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Member member = (Member) o;
+        return memberId == member.memberId && Objects.equals(firstName, member.firstName) && Objects.equals(lastName, member.lastName) && Objects.equals(email, member.email) && Objects.equals(phoneNum, member.phoneNum) && Objects.equals(memberAccount, member.memberAccount);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(memberId, firstName, lastName, email, phoneNum, memberAccount);
+    }
 }

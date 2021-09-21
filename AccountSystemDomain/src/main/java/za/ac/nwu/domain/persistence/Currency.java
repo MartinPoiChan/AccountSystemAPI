@@ -3,13 +3,13 @@ package za.ac.nwu.domain.persistence;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.Objects;
 
 @Entity
 @Table(name = "CURRENCY")
 public class Currency implements Serializable{
     private static final long serialVersionUID = 5041405714629704573L;
 
-    @Id
     private long currencyId;
     private String currencyName;
     private long milesConv;
@@ -22,7 +22,8 @@ public class Currency implements Serializable{
 
 //region Accessors
 
-    @Column(name="MilesConv")
+    @Id
+    @Column(name="CurrencyId")
     public long getCurrencyId() {
         return currencyId;
     }
@@ -32,7 +33,7 @@ public class Currency implements Serializable{
         return currencyName;
     }
 
-    @Column(name="CurrencyId")
+    @Column(name="MilesConv")
     public long getMilesConv() {
         return milesConv;
     }
@@ -54,4 +55,19 @@ public class Currency implements Serializable{
     }
 
     //endregion
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Currency currency = (Currency) o;
+        return currencyId == currency.currencyId && milesConv == currency.milesConv && Objects.equals(currencyName, currency.currencyName);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(currencyId, currencyName, milesConv);
+    }
 }
+
