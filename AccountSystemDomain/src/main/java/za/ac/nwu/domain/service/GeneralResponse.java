@@ -2,6 +2,7 @@ package za.ac.nwu.domain.service;
 import java.io.Serializable;
 import java.util.Objects;
 public class GeneralResponse<T> implements Serializable {
+    private static final long serialVersionUID = 7520826943073637159L;
     private final boolean successful;
     private final transient T payload;
 

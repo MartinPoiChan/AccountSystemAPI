@@ -20,7 +20,7 @@ public class Currency implements Serializable{
         this.milesConv = milesConv;
     }
 
-//region Accessors
+    //region Accessors
 
     @Id
     @Column(name="CurrencyId")

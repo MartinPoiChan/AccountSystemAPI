@@ -27,6 +27,7 @@
             <version>${project.version}</version>
             <scope>compile</scope>
         </dependency>
+
         <dependency>
             <groupId>za.ac.nwu</groupId>
             <artifactId>AccountSystemTranslator</artifactId>
