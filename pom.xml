@@ -86,7 +86,5 @@
             <artifactId>ojdbc8</artifactId>
             <version>19.7.0.0</version>
         </dependency>
-
-
     </dependencies>
 </project>

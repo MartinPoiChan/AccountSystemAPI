@@ -4,6 +4,6 @@ import za.ac.nwu.domain.dto.CurrencyDto;
 
 import java.util.List;
 
-public interface FetchCurrencyFlow {
+public interface FetchCurrencyService {
     List<CurrencyDto> getAllCurrencies();
 }

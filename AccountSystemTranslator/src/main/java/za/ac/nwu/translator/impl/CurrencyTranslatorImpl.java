@@ -12,7 +12,6 @@ import java.util.List;
 
 @Component
 public class CurrencyTranslatorImpl implements CurrencyTranslator {
-
     private CurrencyRepository currencyRepository;
 
     @Autowired
@@ -22,8 +21,11 @@ public class CurrencyTranslatorImpl implements CurrencyTranslator {
     @Override
     public List<CurrencyDto> getAllCurrencies() {
         List<CurrencyDto> currencyDtos = new ArrayList<>();
-        try{
-            for(Currency currency: currencyRepository.findAll()){
+        try {
+            System.out.println(currencyRepository.getCurrencyAllq());
+            currencyDtos.add(new CurrencyDto("USD", 15));
+//            currencyDtos.add(new CurrencyDto(currencyRepository.findById(2L)));
+            for (Currency currency : currencyRepository.findAll()) {
                 currencyDtos.add(new CurrencyDto(currency));
             }
         }
@@ -31,5 +33,16 @@ public class CurrencyTranslatorImpl implements CurrencyTranslator {
             throw new RuntimeException("Unable to read from DB", e);
         }
         return currencyDtos;
+    }
+
+    @Override
+    public CurrencyDto create(CurrencyDto currencyDto){
+        try{
+            Currency currency = currencyRepository.save(currencyDto.getCurrency());
+            return new CurrencyDto(currency);
+        }
+        catch (Exception e){
+            throw new RuntimeException("Unable to save to DB", e);
+        }
     }
 }

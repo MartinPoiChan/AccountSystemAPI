@@ -70,4 +70,16 @@ public class MemberAccountTransaction implements Serializable{
     //endregion
 
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        MemberAccountTransaction that = (MemberAccountTransaction) o;
+        return transactionId == that.transactionId && Objects.equals(accountId, that.accountId) && Objects.equals(rewardId, that.rewardId) && Objects.equals(transactionDate, that.transactionDate);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(transactionId, accountId, rewardId, transactionDate);
+    }
 }

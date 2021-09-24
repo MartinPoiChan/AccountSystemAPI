@@ -6,15 +6,24 @@ import java.time.LocalDate;
 import java.util.Objects;
 
 @Entity
-@Table(name = "CURRENCY")
+@Table(name = "CURRENCY", schema = "hr")
 public class Currency implements Serializable{
     private static final long serialVersionUID = 5041405714629704573L;
 
-    private long currencyId;
-    private String currencyName;
-    private long milesConv;
+    public long currencyId;
+    public String currencyName;
+    public long milesConv;
+
+    public Currency()
+    {}
 
     public Currency(long currencyId, String currencyName, long milesConv) {
+        this.currencyId = currencyId;
+        this.currencyName = currencyName;
+        this.milesConv = milesConv;
+    }
+
+    public Currency(String currencyName, long milesConv) {
         this.currencyId = currencyId;
         this.currencyName = currencyName;
         this.milesConv = milesConv;
@@ -23,17 +32,17 @@ public class Currency implements Serializable{
     //region Accessors
 
     @Id
-    @Column(name="CurrencyId")
+    @Column(name="CURRENCYID")
     public long getCurrencyId() {
         return currencyId;
     }
 
-    @Column(name="CurrencyName")
+    @Column(name="CURRENCYNAME")
     public String getCurrencyName() {
         return currencyName;
     }
 
-    @Column(name="MilesConv")
+    @Column(name="MILESCONV")
     public long getMilesConv() {
         return milesConv;
     }
