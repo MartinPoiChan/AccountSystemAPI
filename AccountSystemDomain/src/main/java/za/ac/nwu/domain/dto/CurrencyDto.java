@@ -12,7 +12,6 @@ import io.swagger.annotations.ApiModelProperty;
 public class CurrencyDto implements Serializable {
     private static final long serialVersionUID = -719206115649296410L;
 
-    private long currencyId;
     private String currencyName;
     private long milesConv;
 
@@ -33,7 +32,7 @@ public class CurrencyDto implements Serializable {
             name = "CurrencyName",
             notes = "Currency Notes",
             dataType = "java.lang.String",
-            example = "GPD",
+            example = "NZD",
             allowEmptyValue = false,
             required = true)
     public String getCurrencyName() {
@@ -46,7 +45,7 @@ public class CurrencyDto implements Serializable {
             name = "CurrencyMiles",
             notes = "Currency Notes",
             dataType = "java.lang.Long",
-            example = "15",
+            example = "150",
             allowEmptyValue = false,
             required = true)
     public long getMilesConv() {
@@ -56,9 +55,6 @@ public class CurrencyDto implements Serializable {
 
     //region Mutator
 
-    public void setCurrencyId(long currencyId) {
-        this.currencyId = currencyId;
-    }
     public void setCurrencyName(String currencyName) {
         this.currencyName = currencyName;
     }
@@ -77,7 +73,7 @@ public class CurrencyDto implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         CurrencyDto that = (CurrencyDto) o;
-        return currencyId == that.currencyId && milesConv == that.milesConv && Objects.equals(currencyName, that.currencyName);
+        return milesConv == that.milesConv && Objects.equals(currencyName, that.currencyName);
     }
 
     @Override

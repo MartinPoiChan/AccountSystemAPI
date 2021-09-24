@@ -24,7 +24,6 @@ public class Currency implements Serializable{
     }
 
     public Currency(String currencyName, long milesConv) {
-        this.currencyId = currencyId;
         this.currencyName = currencyName;
         this.milesConv = milesConv;
     }
@@ -32,6 +31,8 @@ public class Currency implements Serializable{
     //region Accessors
 
     @Id
+    @SequenceGenerator(name = "CURRENCY_SEQ", sequenceName = "hr.CURRENCY_SEQ", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "CURRENCY_SEQ")
     @Column(name="CURRENCYID")
     public long getCurrencyId() {
         return currencyId;
