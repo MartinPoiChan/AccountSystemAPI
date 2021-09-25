@@ -5,28 +5,24 @@ import io.swagger.annotations.ApiParam;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import za.ac.nwu.domain.dto.CurrencyDto;
 import za.ac.nwu.domain.service.GeneralResponse;
-import za.ac.nwu.logic.flow.CreateCurrencyService;
-import za.ac.nwu.logic.flow.FetchCurrencyService;
+import za.ac.nwu.logic.flow.CurrencyService;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("account-type")
-public class DemoController {
+public class CurrencyController {
 
-    private FetchCurrencyService fetchCurrencyService;
-    private CreateCurrencyService createCurrencyService;
+    private CurrencyService currencyService;
 
     @Autowired
-    public DemoController(FetchCurrencyService fetchCurrencyService, CreateCurrencyService createCurrencyService){
-        this.fetchCurrencyService = fetchCurrencyService;
-        this.createCurrencyService = createCurrencyService;
+    public CurrencyController(CurrencyService currencyService){
+        this.currencyService = currencyService;
     }
 
     @GetMapping("/getAllCurrency")
@@ -38,7 +34,7 @@ public class DemoController {
             @ApiResponse(code = 500, message = "Internal Server Error", response = GeneralResponse.class)})
 
     public ResponseEntity<GeneralResponse<List<CurrencyDto>>> getAllCurrency() {
-        List<CurrencyDto>currencyType = fetchCurrencyService.getAllCurrencies();
+        List<CurrencyDto>currencyType = currencyService.getAllCurrencies();
         GeneralResponse<List<CurrencyDto>> response = new GeneralResponse<>(true, currencyType);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
@@ -55,7 +51,7 @@ public class DemoController {
             @ApiParam(value = "Request body to create a new Currency", required = true)
             @RequestBody CurrencyDto currency) {
 
-            CurrencyDto currencyResponse = createCurrencyService.create(currency);
+            CurrencyDto currencyResponse = currencyService.createCurrency(currency);
             GeneralResponse<CurrencyDto> response = new GeneralResponse<>(true, currencyResponse);
             return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
