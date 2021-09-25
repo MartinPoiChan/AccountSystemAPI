@@ -19,22 +19,22 @@ public class CurrencyTranslatorImpl implements CurrencyTranslator {
     public CurrencyTranslatorImpl(CurrencyRepository currencyRepository){
         this.currencyRepository = currencyRepository;
     }
-    @Override
-    public List<CurrencyDto> getAllCurrencies() {
-        List<CurrencyDto> currencyDtos = new ArrayList<>();
-        try {
-            System.out.println(currencyRepository.getCurrencyOne());
-//            currencyDtos.add(new CurrencyDto("USD", 15));
-            //currencyDtos.add(new CurrencyDto(currencyRepository.findOne()));
-            for (Currency currency : currencyRepository.findAll()) {
-                currencyDtos.add(new CurrencyDto(currency));
-            }
-        }
-        catch (Exception e){
-            throw new RuntimeException("Unable to read from DB", e);
-        }
-        return currencyDtos;
-    }
+//    @Override
+//    public List<CurrencyDto> getAllCurrencies() {
+//        List<CurrencyDto> currencyDtos = new ArrayList<>();
+//        try {
+//            System.out.println(currencyRepository.getCurrencyOne());
+////            currencyDtos.add(new CurrencyDto("USD", 15));
+//            //currencyDtos.add(new CurrencyDto(currencyRepository.findOne()));
+//            for (Currency currency : currencyRepository.findAll()) {
+//                currencyDtos.add(new CurrencyDto(currency));
+//            }
+//        }
+//        catch (Exception e){
+//            throw new RuntimeException("Unable to read from DB", e);
+//        }
+//        return currencyDtos;
+//    }
 
     @Override
     public CurrencyDto create(CurrencyDto currencyDto){

@@ -54,7 +54,6 @@ public class CurrencyDto implements Serializable {
     //endregion
 
     //region Mutator
-
     public void setCurrencyName(String currencyName) {
         this.currencyName = currencyName;
     }
@@ -63,11 +62,13 @@ public class CurrencyDto implements Serializable {
     }
     //endregion
 
+    //region JsonIgnore
     @JsonIgnore
     public Currency getCurrency(){
         return new Currency(getCurrencyName(),getMilesConv());
     }
 
+    //endregion
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

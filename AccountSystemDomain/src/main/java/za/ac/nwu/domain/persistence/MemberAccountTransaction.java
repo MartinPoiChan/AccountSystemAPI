@@ -23,8 +23,16 @@ public class MemberAccountTransaction implements Serializable{
         this.transactionDate = transactionDate;
     }
 
+    public MemberAccountTransaction(MemberAccount accountId, Reward rewardId, LocalDate transactionDate) {
+        this.accountId = accountId;
+        this.rewardId = rewardId;
+        this.transactionDate = transactionDate;
+    }
+
     //region Accessor
     @Id
+    @SequenceGenerator(name = "MEMBER_ACCOUNT_TRANSACTION_SEQ", sequenceName = "hr.MEMBER_ACCOUNT_TRANSACTION_SEQ", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "MEMBER_ACCOUNT_TRANSACTION_SEQ")
     @Column(name="TransactionId")
     public long getTransactionId() {
         return transactionId;
@@ -50,7 +58,6 @@ public class MemberAccountTransaction implements Serializable{
     //endregion
 
     //region Mutator
-
     public void setTransactionId(long transactionId) {
         this.transactionId = transactionId;
     }
@@ -68,7 +75,6 @@ public class MemberAccountTransaction implements Serializable{
     }
 
     //endregion
-
 
     @Override
     public boolean equals(Object o) {
