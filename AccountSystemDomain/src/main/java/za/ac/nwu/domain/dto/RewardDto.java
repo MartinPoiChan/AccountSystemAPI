@@ -1,9 +1,13 @@
 package za.ac.nwu.domain.dto;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import za.ac.nwu.domain.persistence.Reward;
 
 import java.io.Serializable;
+import java.util.Objects;
 
+@ApiModel(value = "Reward", description = "A DTO for Reward")
 public class RewardDto implements Serializable {
 
     private static final long serialVersionUID = -8954717361700421623L;
@@ -22,11 +26,28 @@ public class RewardDto implements Serializable {
     }
 
     //region Accessor
-
+    @ApiModelProperty(
+            position = 1,
+            value = "Reward Name",
+            name = "RewardName",
+            notes = "Reward Notes",
+            dataType = "java.lang.String",
+            example = "CapeUnion999",
+            allowEmptyValue = false,
+            required = true)
     public String getRewardName() {
         return rewardName;
     }
 
+    @ApiModelProperty(
+            position = 1,
+            value = "Reward Cost",
+            name = "RewardCost",
+            notes = "Reward Notes",
+            dataType = "java.lang.Long",
+            example = "9999",
+            allowEmptyValue = false,
+            required = true)
     public long getMileCost() {
         return mileCost;
     }
@@ -45,12 +66,16 @@ public class RewardDto implements Serializable {
 
     //endregion
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        RewardDto rewardDto = (RewardDto) o;
+        return mileCost == rewardDto.mileCost && Objects.equals(rewardName, rewardDto.rewardName);
+    }
 
-    //region Accessor
-
-    //endregion
-
-    //region Mutator
-
-    //endregion
+    @Override
+    public int hashCode() {
+        return Objects.hash(rewardName, mileCost);
+    }
 }

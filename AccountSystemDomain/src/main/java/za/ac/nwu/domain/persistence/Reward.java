@@ -2,22 +2,24 @@ package za.ac.nwu.domain.persistence;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.time.LocalDate;
+
 import java.util.Set;
 
 @Entity
-@Table(name = "CURRENCY")
-
+@Table(name = "REWARD", schema = "hr")
 public class Reward implements Serializable{
     private static final long serialVersionUID = 4933211794946159713L;
 
-    private Set<MemberAccountTransaction> memberAccountTransactions;
-    private long rewardId;
-    private String rewardName;
-    private long mileCost;
+    public Set<MemberAccountTransaction> memberAccountTransactions;
+    public long rewardId;
+    public String rewardName;
+    public long mileCost;
 
-    public Reward(Set<MemberAccountTransaction> memberAccountTransactions, long rewardId, String rewardName, long mileCost) {
-        this.memberAccountTransactions = memberAccountTransactions;
+    public Reward(){
+
+    }
+
+    public Reward( long rewardId, String rewardName, long mileCost) {
         this.rewardId = rewardId;
         this.rewardName = rewardName;
         this.mileCost = mileCost;
@@ -25,17 +27,19 @@ public class Reward implements Serializable{
 
     //region Accessor
     @Id
-    @Column(name="RewardId")
+    @SequenceGenerator(name = "REWARD_SEQ", sequenceName = "hr.REWARD_SEQ", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "REWARD_SEQ")
+    @Column(name="REWARD_ID")
     public long getRewardId() {
         return rewardId;
     }
 
-    @Column(name="RewardName")
+    @Column(name="REWARD_NAME")
     public String getRewardName() {
         return rewardName;
     }
 
-    @Column(name="MileCost")
+    @Column(name="MILES_COST")
     public long getMileCost() {
         return mileCost;
     }

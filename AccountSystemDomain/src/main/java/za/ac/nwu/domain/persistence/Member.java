@@ -1,13 +1,14 @@
 package za.ac.nwu.domain.persistence;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import java.io.Serializable;
-import java.time.LocalDate;
 import java.util.Objects;
 import java.util.Set;
 
 @Entity
-@Table(name = "MEMBER")
+@Table(name = "MEMBER", schema = "hr")
 public class Member implements Serializable {
     private static final long serialVersionUID = 8249544561640133489L;
 
@@ -18,43 +19,46 @@ public class Member implements Serializable {
     private String phoneNum;
     private Set<MemberAccount> memberAccount;
 
-    public Member(long memberId, String firstName, String lastName, String email, String phoneNum, Set<MemberAccount> memberAccount) {
+    public Member()
+    {}
+
+    public Member(long memberId, String firstName, String lastName, String email, String phoneNum) {
         this.memberId = memberId;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.phoneNum = phoneNum;
-        this.memberAccount = memberAccount;
     }
 
     //region Accessors
     @Id
-    @Column(name="MemberId")
+    @Column(name="MEMBER_ID")
     public long getMemberId() {
         return memberId;
     }
 
-    @Column(name="FirstName")
+    @Column(name="FIRST_NAME")
     public String getFirstName() {
         return firstName;
     }
 
-    @Column(name="LastName")
+    @Column(name="LAST_NAME")
     public String getLastName() {
         return lastName;
     }
 
-    @Column(name="Email")
+    @Column(name="EMAIL")
     public String getEmail() {
         return email;
     }
 
-    @Column(name="PhoneNum")
+    @Column(name="PHONE_NUM")
     public String getPhoneNum() {
         return phoneNum;
     }
 
-    @OneToMany(targetEntity = MemberAccount.class, fetch = FetchType.LAZY, mappedBy = "accountId", orphanRemoval = true, cascade = CascadeType.PERSIST)
+    @OneToMany(targetEntity = MemberAccount.class, fetch = FetchType.EAGER, mappedBy = "memberId", orphanRemoval = true, cascade = CascadeType.PERSIST)
+    @JsonManagedReference
     public Set<MemberAccount> getMemberAccount(){
         return memberAccount;
     }
@@ -93,11 +97,11 @@ public class Member implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Member member = (Member) o;
-        return memberId == member.memberId && Objects.equals(firstName, member.firstName) && Objects.equals(lastName, member.lastName) && Objects.equals(email, member.email) && Objects.equals(phoneNum, member.phoneNum) && Objects.equals(memberAccount, member.memberAccount);
+        return memberId == member.memberId && Objects.equals(firstName, member.firstName) && Objects.equals(lastName, member.lastName) && Objects.equals(email, member.email) && Objects.equals(phoneNum, member.phoneNum) ;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(memberId, firstName, lastName, email, phoneNum, memberAccount);
+        return Objects.hash(memberId, firstName, lastName, email, phoneNum);
     }
 }

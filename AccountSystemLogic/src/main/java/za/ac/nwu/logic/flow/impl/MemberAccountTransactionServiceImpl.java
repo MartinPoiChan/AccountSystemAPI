@@ -30,7 +30,7 @@ public class MemberAccountTransactionServiceImpl implements MemberAccountTransac
             }
         }
         catch (Exception e){
-            throw new RuntimeException("Unable to save to DB", e);
+            throw new RuntimeException("Unable to read to DB", e);
         }
         return memberAccountTransactionDtos;
     }

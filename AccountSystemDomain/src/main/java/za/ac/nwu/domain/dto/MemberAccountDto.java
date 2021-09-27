@@ -17,9 +17,10 @@ public class MemberAccountDto implements Serializable {
         this.milesBalance = milesBalance;
     }
 
+    //  Removed the member id you should probably replace that twat
     public MemberAccountDto(MemberAccount memberAccount) {
-        this.setMemberId(memberAccount.getMemberId());
         this.setMilesBalance(memberAccount.getMilesBalance());
+        this.setMemberId(memberAccount.getMemberId());
     }
     //region Accessor
     public Member getMemberId() {

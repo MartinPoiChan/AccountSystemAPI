@@ -18,7 +18,7 @@ public class MemberDto implements Serializable{
 
     public MemberDto(Member member){
         this.setFirstName(member.getFirstName());
-        this.setLastName(member.getFirstName());
+        this.setLastName(member.getLastName());
     }
 
     //region Accessor

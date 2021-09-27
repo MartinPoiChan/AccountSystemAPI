@@ -15,7 +15,7 @@ import za.ac.nwu.logic.flow.CurrencyService;
 import java.util.List;
 
 @RestController
-@RequestMapping("account-type")
+@RequestMapping("currency")
 public class CurrencyController {
 
     private CurrencyService currencyService;

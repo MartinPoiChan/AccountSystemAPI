@@ -1,2 +1,3 @@
 # AccountSystemAPI
-    Fix the Hash code in the domain persistence
+    Possibly use a DTO instead of the Model to remove the recusion problem
+    Create a DTO 
