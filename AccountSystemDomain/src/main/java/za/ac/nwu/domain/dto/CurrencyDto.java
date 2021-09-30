@@ -12,6 +12,7 @@ import io.swagger.annotations.ApiModelProperty;
 public class CurrencyDto implements Serializable {
     private static final long serialVersionUID = -719206115649296410L;
 
+    private long currencyId;
     private String currencyName;
     private long milesConv;
 
@@ -21,10 +22,26 @@ public class CurrencyDto implements Serializable {
     }
 
     public CurrencyDto(Currency currency){
+        this.setCurrencyId(currency.getCurrencyId());
         this.setCurrencyName(currency.getCurrencyName());
         this.setMilesConv(currency.getMilesConv());
     }
+
+
     //region Accessor
+    @ApiModelProperty(
+            position = 1,
+            value = "Currency ID",
+            name = "CurrencyID",
+            notes = "Currency Notes",
+            dataType = "java.lang.Long",
+            example = "1",
+            allowEmptyValue = false,
+            required = true)
+    public long getCurrencyId() {
+        return currencyId;
+    }
+
 
     @ApiModelProperty(
             position = 1,
@@ -54,6 +71,10 @@ public class CurrencyDto implements Serializable {
     //endregion
 
     //region Mutator
+
+    public void setCurrencyId(long currencyId) {
+        this.currencyId = currencyId;
+    }
     public void setCurrencyName(String currencyName) {
         this.currencyName = currencyName;
     }
@@ -85,6 +106,7 @@ public class CurrencyDto implements Serializable {
     @Override
     public String toString() {
     return "CurrencyDto{" +
+            "Currency ID="+ currencyId+
             "Currency Name="+ currencyName+
             "Currency Miles Conversion="+milesConv+
             "}";

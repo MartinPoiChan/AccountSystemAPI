@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import za.ac.nwu.domain.dto.MemberDto;
-import za.ac.nwu.domain.dto.RewardDto;
 import za.ac.nwu.domain.service.GeneralResponse;
 import za.ac.nwu.logic.flow.MemberService;
 

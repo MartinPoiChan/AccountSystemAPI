@@ -1,5 +1,6 @@
 package za.ac.nwu.domain.dto;
 
+import za.ac.nwu.domain.persistence.Currency;
 import za.ac.nwu.domain.persistence.Member;
 import za.ac.nwu.domain.persistence.MemberAccount;
 
@@ -11,18 +12,25 @@ public class MemberAccountDto implements Serializable {
 
     private Member memberId;
     private long milesBalance;
+    private long plays;
+    private Currency currencyId;
 
-    public MemberAccountDto(Member memberId, long milesBalance) {
+    public MemberAccountDto(Member memberId, long milesBalance, long plays, Currency currencyId) {
         this.memberId = memberId;
         this.milesBalance = milesBalance;
+        this.plays = plays;
+        this.currencyId = currencyId;
     }
 
-    //  Removed the member id you should probably replace that twat
     public MemberAccountDto(MemberAccount memberAccount) {
         this.setMilesBalance(memberAccount.getMilesBalance());
         this.setMemberId(memberAccount.getMemberId());
+        this.setPlays(memberAccount.getPlays());
+        this.setCurrencyId(memberAccount.getCurrencyId());
     }
     //region Accessor
+
+
     public Member getMemberId() {
         return memberId;
     }
@@ -30,9 +38,19 @@ public class MemberAccountDto implements Serializable {
     public long getMilesBalance() {
         return milesBalance;
     }
+
+    public long getPlays() {
+        return plays;
+    }
+
+    public Currency getCurrencyId() {
+        return currencyId;
+    }
+
     //endregion
 
     //region Mutator
+
     public void setMemberId(Member memberId) {
         this.memberId = memberId;
     }
@@ -40,5 +58,15 @@ public class MemberAccountDto implements Serializable {
     public void setMilesBalance(long milesBalance) {
         this.milesBalance = milesBalance;
     }
+
+    public void setPlays(long plays) {
+        this.plays = plays;
+    }
+
+    public void setCurrencyId(Currency currencyId) {
+        this.currencyId = currencyId;
+    }
+
+
     //endregion
 }

@@ -1,7 +1,6 @@
 package za.ac.nwu.domain.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import za.ac.nwu.domain.persistence.MemberAccount;
 import za.ac.nwu.domain.persistence.MemberAccountTransaction;
@@ -11,17 +10,15 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Objects;
 
-@ApiModel(value = "MemberAccountTransaction", description = "A DTO for MemberAccountTransaction")
-public class MemberAccountTransactionDto implements Serializable {
-
+public class MemberAccountTransactionCreateDto implements Serializable {
     private static final long serialVersionUID = -5898396210160031291L;
-    private MemberAccount accountId;
-    private Partner partnerId;
+    private long accountId;
+    private long partnerId;
     private LocalDate transactionDate;
-    private Long oldBalance;
-    private Long amount;
+    private long oldBalance;
+    private long amount;
 
-    public MemberAccountTransactionDto(MemberAccount accountId, Partner partnerId, LocalDate transactionDate, Long oldBalance, Long amount) {
+    public MemberAccountTransactionCreateDto(long accountId, long partnerId, LocalDate transactionDate, long oldBalance, long amount) {
         this.accountId = accountId;
         this.partnerId = partnerId;
         this.transactionDate = transactionDate;
@@ -29,13 +26,11 @@ public class MemberAccountTransactionDto implements Serializable {
         this.amount = amount;
     }
 
-    public MemberAccountTransactionDto(MemberAccountTransaction memberAccountTransaction) {
-        this.setAccountId(memberAccountTransaction.getAccountId());
-        this.setPartnerId(memberAccountTransaction.getPartnerId());
-        this.setTransactionDate(memberAccountTransaction.getTransactionDate());
-        this.setOldBalance(memberAccountTransaction.getOldBalance());
-        this.setAmount(memberAccountTransaction.getAmount());
-    }
+//    public MemberAccountTransactionCreateDto(MemberAccountTransaction memberAccountTransaction) {
+//        this.setTransactionDate(memberAccountTransaction.getTransactionDate());
+//        this.setOldBalance(memberAccountTransaction.getOldBalance());
+//        this.setAmount(memberAccountTransaction.getAmount());
+//    }
 
     //region Accessor
     @ApiModelProperty(
@@ -46,7 +41,7 @@ public class MemberAccountTransactionDto implements Serializable {
             dataType = "java.lang.Long",
             allowEmptyValue = false,
             required = true)
-    public MemberAccount getAccountId() {
+    public long getAccountId() {
         return accountId;
     }
 
@@ -58,7 +53,7 @@ public class MemberAccountTransactionDto implements Serializable {
             dataType = "java.lang.Long",
             allowEmptyValue = false,
             required = true)
-    public Partner getPartnerId() {
+    public long getPartnerId() {
         return partnerId;
     }
 
@@ -105,11 +100,11 @@ public class MemberAccountTransactionDto implements Serializable {
 
     //region Mutator
 
-    public void setAccountId(MemberAccount accountId) {
+    public void setAccountId(long accountId) {
         this.accountId = accountId;
     }
 
-    public void setPartnerId(Partner partnerId) {
+    public void setPartnerId(long partnerId) {
         this.partnerId = partnerId;
     }
 
@@ -117,31 +112,20 @@ public class MemberAccountTransactionDto implements Serializable {
         this.transactionDate = transactionDate;
     }
 
-    public void setOldBalance(Long oldBalance) {
+    public void setOldBalance(long oldBalance) {
         this.oldBalance = oldBalance;
     }
 
-    public void setAmount(Long amount) {
+    public void setAmount(long amount) {
         this.amount = amount;
     }
 
+
     //endregion
 
-    @JsonIgnore
-    public MemberAccountTransaction getMATransaction(){
-        return new MemberAccountTransaction(getAccountId(),getPartnerId(),getTransactionDate(),getOldBalance(),getAmount());
-    }
+//    @JsonIgnore
+//    public MemberAccountTransaction getMATransaction(){
+//        return new MemberAccountTransaction(getAccountId(),getPartnerId(),getTransactionDate(),getOldBalance(),getAmount());
+//    }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        MemberAccountTransactionDto that = (MemberAccountTransactionDto) o;
-        return Objects.equals(accountId, that.accountId) && Objects.equals(partnerId, that.partnerId) && Objects.equals(transactionDate, that.transactionDate);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(accountId, partnerId, transactionDate);
-    }
 }

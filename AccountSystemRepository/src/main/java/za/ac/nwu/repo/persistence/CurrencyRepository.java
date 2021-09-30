@@ -7,6 +7,6 @@ package za.ac.nwu.repo.persistence;
 
 @Repository
 public interface CurrencyRepository extends JpaRepository<Currency, Long> {
-    @Query(value = "SELECT * FROM CURRENCY WHERE CURRENCYID = 2", nativeQuery = true)
-    Currency getCurrencyOne();
+    @Query(value = "SELECT * FROM CURRENCY WHERE CURRENCY_ID = :id", nativeQuery = true)
+    Currency getOne(long id);
 }

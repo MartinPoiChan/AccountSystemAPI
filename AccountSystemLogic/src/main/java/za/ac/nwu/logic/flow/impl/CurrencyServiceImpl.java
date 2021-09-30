@@ -36,6 +36,18 @@ public class CurrencyServiceImpl implements CurrencyService {
     }
 
     @Override
+    public CurrencyDto getOne(long id) {
+        CurrencyDto currencyDto;
+        try {
+            currencyDto = new CurrencyDto(currencyRepository.getOne(id));
+        }
+        catch (Exception e){
+            throw new RuntimeException("Unable to read from DB", e);
+        }
+        return currencyDto;
+    }
+
+    @Override
     public CurrencyDto createCurrency(CurrencyDto currencyDto){
         try{
             Currency currency = currencyRepository.save(currencyDto.getCurrency());

@@ -3,9 +3,7 @@ package za.ac.nwu.logic.flow.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import za.ac.nwu.domain.dto.MemberDto;
-import za.ac.nwu.domain.dto.RewardDto;
 import za.ac.nwu.domain.persistence.Member;
-import za.ac.nwu.domain.persistence.Reward;
 import za.ac.nwu.logic.flow.MemberService;
 import za.ac.nwu.repo.persistence.MemberRepository;
 

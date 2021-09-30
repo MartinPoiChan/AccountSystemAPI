@@ -1,8 +1,12 @@
 package za.ac.nwu.domain.persistence;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import za.ac.nwu.domain.dto.CurrencyDto;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Table(name = "CURRENCY", schema = "hr")
@@ -12,6 +16,7 @@ public class Currency implements Serializable{
     public long currencyId;
     public String currencyName;
     public long milesConv;
+    private Set<MemberAccount> memberAccount;
 
     public Currency()
     {}
@@ -27,26 +32,37 @@ public class Currency implements Serializable{
         this.milesConv = milesConv;
     }
 
+    public Currency(CurrencyDto currencyDto) {
+        setCurrencyId(currencyDto.getCurrencyId());
+        setCurrencyName(currencyDto.getCurrencyName());
+        setMilesConv(currencyDto.getMilesConv());
+    }
+
     //region Accessors
 
     @Id
     @SequenceGenerator(name = "CURRENCY_SEQ", sequenceName = "hr.CURRENCY_SEQ", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "CURRENCY_SEQ")
-    @Column(name="CURRENCYID")
+    @Column(name="CURRENCY_ID")
     public long getCurrencyId() {
         return currencyId;
     }
 
-    @Column(name="CURRENCYNAME")
+    @Column(name="CURRENCY_NAME")
     public String getCurrencyName() {
         return currencyName;
     }
 
-    @Column(name="MILESCONV")
+    @Column(name="MILES_CONV")
     public long getMilesConv() {
         return milesConv;
     }
 
+    @OneToMany(targetEntity = MemberAccount.class, fetch = FetchType.EAGER, mappedBy = "currencyId", orphanRemoval = true, cascade = CascadeType.ALL)
+    @JsonIgnore
+    public Set<MemberAccount> getMemberAccount(){
+        return memberAccount;
+    }
     //endregion
 
     //region Mutator
@@ -61,6 +77,10 @@ public class Currency implements Serializable{
 
     public void setMilesConv(long milesConv) {
         this.milesConv = milesConv;
+    }
+
+    public void setMemberAccount(Set<MemberAccount> memberAccount) {
+        this.memberAccount = memberAccount;
     }
 
     //endregion

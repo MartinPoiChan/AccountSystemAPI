@@ -1,5 +1,9 @@
 package za.ac.nwu.domain.persistence;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import za.ac.nwu.domain.dto.MemberAccountTransactionCreateDto;
+import za.ac.nwu.domain.dto.MemberAccountTransactionDto;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -13,29 +17,43 @@ public class MemberAccountTransaction implements Serializable{
 
     private long transactionId;
     private MemberAccount accountId;
-    private Reward rewardId;
+    private Partner partnerId;
     private LocalDate transactionDate;
     private Long oldBalance;
-    private Long newBalance;
+    private Long amount;
 
     public MemberAccountTransaction()
     {}
 
-    public MemberAccountTransaction(long transactionId, MemberAccount accountId, Reward rewardId, LocalDate transactionDate, Long oldBalance, Long newBalance) {
+    public MemberAccountTransaction(long transactionId, MemberAccount accountId, Partner partnerId, LocalDate transactionDate, Long oldBalance, Long amount) {
         this.transactionId = transactionId;
         this.accountId = accountId;
-        this.rewardId = rewardId;
+        this.partnerId = partnerId;
         this.transactionDate = transactionDate;
         this.oldBalance = oldBalance;
-        this.newBalance = newBalance;
+        this.amount = amount;
     }
 
-    public MemberAccountTransaction(MemberAccount accountId, Reward rewardId, LocalDate transactionDate, Long oldBalance, Long newBalance) {
+    public MemberAccountTransaction(MemberAccount accountId, Partner partnerId, LocalDate transactionDate, Long oldBalance, Long amount) {
         this.accountId = accountId;
-        this.rewardId = rewardId;
+        this.partnerId = partnerId;
         this.transactionDate = transactionDate;
         this.oldBalance = oldBalance;
-        this.newBalance = newBalance;
+        this.amount = amount;
+    }
+
+    public MemberAccountTransaction(MemberAccountTransactionDto memberAccountTransactionDto){
+        setAccountId(memberAccountTransactionDto.getAccountId());
+        setPartnerId(memberAccountTransactionDto.getPartnerId());
+        setTransactionDate(memberAccountTransactionDto.getTransactionDate());
+        setOldBalance(memberAccountTransactionDto.getOldBalance());
+        setAmount(memberAccountTransactionDto.getAmount());
+    }
+
+    public MemberAccountTransaction(MemberAccountTransactionCreateDto memberAccountTransactionCreateDto) {
+        this.setTransactionDate(memberAccountTransactionCreateDto.getTransactionDate());
+        this.setOldBalance(memberAccountTransactionCreateDto.getOldBalance());
+        this.setAmount(memberAccountTransactionCreateDto.getAmount());
     }
 
     //region Accessor
@@ -49,14 +67,16 @@ public class MemberAccountTransaction implements Serializable{
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="ACCOUNT_ID")
+    @JsonIgnore
     public MemberAccount getAccountId() {
         return accountId;
     }
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="REWARD_ID")
-    public Reward getRewardId() {
-        return rewardId;
+    @JoinColumn(name="PARTNER_ID")
+    @JsonIgnore
+    public Partner getPartnerId() {
+        return partnerId;
     }
 
     @Column(name="TRANSACTION_DATE")
@@ -69,9 +89,9 @@ public class MemberAccountTransaction implements Serializable{
         return oldBalance;
     }
 
-    @Column(name="NEW_BALANCE")
-    public Long getNewBalance() {
-        return newBalance;
+    @Column(name="AMOUNT")
+    public Long getAmount() {
+        return amount;
     }
 
     //endregion
@@ -85,8 +105,8 @@ public class MemberAccountTransaction implements Serializable{
         this.accountId = accountId;
     }
 
-    public void setRewardId(Reward rewardId) {
-        this.rewardId = rewardId;
+    public void setPartnerId(Partner partnerId) {
+        this.partnerId = partnerId;
     }
 
     public void setTransactionDate(LocalDate transactionDate) {
@@ -97,22 +117,10 @@ public class MemberAccountTransaction implements Serializable{
         this.oldBalance = oldBalance;
     }
 
-    public void setNewBalance(Long newBalance) {
-        this.newBalance = newBalance;
+    public void setAmount(Long amount) {
+        this.amount = amount;
     }
 
     //endregion
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        MemberAccountTransaction that = (MemberAccountTransaction) o;
-        return transactionId == that.transactionId && Objects.equals(accountId, that.accountId) && Objects.equals(rewardId, that.rewardId) && Objects.equals(transactionDate, that.transactionDate);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(transactionId, accountId, rewardId, transactionDate);
-    }
 }

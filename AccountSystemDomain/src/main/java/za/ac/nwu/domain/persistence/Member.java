@@ -1,5 +1,6 @@
 package za.ac.nwu.domain.persistence;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
@@ -57,8 +58,8 @@ public class Member implements Serializable {
         return phoneNum;
     }
 
-    @OneToMany(targetEntity = MemberAccount.class, fetch = FetchType.EAGER, mappedBy = "memberId", orphanRemoval = true, cascade = CascadeType.PERSIST)
-    @JsonManagedReference
+    @OneToMany(targetEntity = MemberAccount.class, fetch = FetchType.EAGER, mappedBy = "memberId", cascade = CascadeType.ALL)
+    @JsonIgnore
     public Set<MemberAccount> getMemberAccount(){
         return memberAccount;
     }

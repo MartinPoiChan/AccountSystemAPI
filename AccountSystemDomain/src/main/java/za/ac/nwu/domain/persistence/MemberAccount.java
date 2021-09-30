@@ -1,11 +1,10 @@
 package za.ac.nwu.domain.persistence;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import za.ac.nwu.domain.dto.MemberAccountDto;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.time.LocalDate;
 import java.util.Set;
 
 @Entity
@@ -18,15 +17,27 @@ public class MemberAccount implements Serializable{
     private long milesBalance;
     private Set<MemberAccountTransaction> memberAccountTransactions;
     private Member memberId;
+    private Currency currencyId;
+    private long plays;
+
 
     public MemberAccount(){
 
     }
 
-    public MemberAccount(long accountId, Member memberId, long milesBalance) {
+    public MemberAccount(long accountId, Member memberId, long milesBalance, long plays, Currency currencyId) {
         this.accountId = accountId;
         this.memberId = memberId;
         this.milesBalance = milesBalance;
+        this.plays = plays;
+        this.currencyId = currencyId;
+    }
+
+    public MemberAccount(MemberAccountDto memberAccountDto){
+        this.setMemberId(memberAccountDto.getMemberId());
+        this.setMilesBalance(memberAccountDto.getMilesBalance());
+        this.setPlays(memberAccountDto.getPlays());
+        this.setCurrencyId(memberAccountDto.getCurrencyId());
     }
 
     //region Accessor
@@ -35,9 +46,10 @@ public class MemberAccount implements Serializable{
     public long getAccountId() {
         return accountId;
     }
+
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="MEMBER_ID")
-    @JsonBackReference
+    @JsonIgnore
     public Member getMemberId() {
         return memberId;
     }
@@ -47,10 +59,23 @@ public class MemberAccount implements Serializable{
         return milesBalance;
     }
 
-//    @OneToMany(targetEntity = MemberAccountTransaction.class, fetch = FetchType.LAZY, mappedBy = "accountId", orphanRemoval = true, cascade = CascadeType.PERSIST)
-//    public Set<MemberAccountTransaction> getMemberAccountTransactions(){
-//        return memberAccountTransactions;
-//    }
+    @Column(name="PLAYS")
+    public long getPlays() {
+        return plays;
+    }
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "CURRENCY_ID")
+    @JsonIgnore
+    public Currency getCurrencyId() {
+        return currencyId;
+    }
+
+    @OneToMany(targetEntity = MemberAccountTransaction.class, fetch = FetchType.LAZY, mappedBy = "accountId", orphanRemoval = true, cascade = CascadeType.ALL)
+    @JsonIgnore
+    public Set<MemberAccountTransaction> getMemberAccountTransactions(){
+        return memberAccountTransactions;
+    }
 
     //endregion
 
@@ -67,9 +92,17 @@ public class MemberAccount implements Serializable{
         this.milesBalance = milesBalance;
     }
 
-//    public void setMemberAccountTransactions(Set<MemberAccountTransaction> memberAccountTransactions) {
-//        this.memberAccountTransactions = memberAccountTransactions;
-//    }
+    public void setPlays(long plays) {
+        this.plays = plays;
+    }
+
+    public void setCurrencyId(Currency currencyId) {
+        this.currencyId = currencyId;
+    }
+
+    public void setMemberAccountTransactions(Set<MemberAccountTransaction> memberAccountTransactions) {
+        this.memberAccountTransactions = memberAccountTransactions;
+    }
     //endregion
 }
 
