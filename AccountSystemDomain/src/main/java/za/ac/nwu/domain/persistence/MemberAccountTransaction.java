@@ -1,6 +1,8 @@
 package za.ac.nwu.domain.persistence;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import za.ac.nwu.domain.dto.MemberAccountTransactionAdditionCreateDto;
 import za.ac.nwu.domain.dto.MemberAccountTransactionCreateDto;
 import za.ac.nwu.domain.dto.MemberAccountTransactionDto;
 
@@ -52,8 +54,12 @@ public class MemberAccountTransaction implements Serializable{
 
     public MemberAccountTransaction(MemberAccountTransactionCreateDto memberAccountTransactionCreateDto) {
         this.setTransactionDate(memberAccountTransactionCreateDto.getTransactionDate());
-        this.setOldBalance(memberAccountTransactionCreateDto.getOldBalance());
         this.setAmount(memberAccountTransactionCreateDto.getAmount());
+    }
+
+    public MemberAccountTransaction(MemberAccountTransactionAdditionCreateDto memberAccountTransactionAdditionCreateDto) {
+        this.setTransactionDate(memberAccountTransactionAdditionCreateDto.getTransactionDate());
+        this.setAmount(memberAccountTransactionAdditionCreateDto.getAmount());
     }
 
     //region Accessor
@@ -123,4 +129,16 @@ public class MemberAccountTransaction implements Serializable{
 
     //endregion
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        MemberAccountTransaction that = (MemberAccountTransaction) o;
+        return transactionId == that.transactionId && Objects.equals(accountId, that.accountId) && Objects.equals(partnerId, that.partnerId) && Objects.equals(transactionDate, that.transactionDate) && Objects.equals(oldBalance, that.oldBalance) && Objects.equals(amount, that.amount);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(transactionId, accountId, partnerId, transactionDate, oldBalance, amount);
+    }
 }

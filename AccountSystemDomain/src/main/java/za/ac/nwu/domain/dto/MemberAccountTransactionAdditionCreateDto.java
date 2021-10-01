@@ -10,27 +10,19 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Objects;
 
-public class MemberAccountTransactionCreateDto implements Serializable {
+public class MemberAccountTransactionAdditionCreateDto implements Serializable {
     private static final long serialVersionUID = -5898396210160031291L;
     private long accountId;
-    private long partnerId;
     private LocalDate transactionDate;
     private long oldBalance;
     private long amount;
 
-    public MemberAccountTransactionCreateDto(long accountId, long partnerId, LocalDate transactionDate, long oldBalance, long amount) {
+    public MemberAccountTransactionAdditionCreateDto(long accountId, LocalDate transactionDate, long oldBalance, long amount) {
         this.accountId = accountId;
-        this.partnerId = partnerId;
         this.transactionDate = transactionDate;
         this.oldBalance = oldBalance;
         this.amount = amount;
     }
-
-//    public MemberAccountTransactionCreateDto(MemberAccountTransaction memberAccountTransaction) {
-//        this.setTransactionDate(memberAccountTransaction.getTransactionDate());
-//        this.setOldBalance(memberAccountTransaction.getOldBalance());
-//        this.setAmount(memberAccountTransaction.getAmount());
-//    }
 
     //region Accessor
     @ApiModelProperty(
@@ -44,19 +36,6 @@ public class MemberAccountTransactionCreateDto implements Serializable {
             required = true)
     public long getAccountId() {
         return accountId;
-    }
-
-    @ApiModelProperty(
-            position = 2,
-            value = "Reward ID",
-            name = "RewardId",
-            notes = "Reward Id from Reward table",
-            dataType = "java.lang.Long",
-            example = "1",
-            allowEmptyValue = false,
-            required = true)
-    public long getPartnerId() {
-        return partnerId;
     }
 
     @ApiModelProperty(
@@ -106,10 +85,6 @@ public class MemberAccountTransactionCreateDto implements Serializable {
         this.accountId = accountId;
     }
 
-    public void setPartnerId(long partnerId) {
-        this.partnerId = partnerId;
-    }
-
     public void setTransactionDate(LocalDate transactionDate) {
         this.transactionDate = transactionDate;
     }
@@ -121,7 +96,6 @@ public class MemberAccountTransactionCreateDto implements Serializable {
     public void setAmount(long amount) {
         this.amount = amount;
     }
-
 
     //endregion
 

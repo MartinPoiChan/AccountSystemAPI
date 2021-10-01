@@ -1,3 +1,5 @@
 # AccountSystemAPI
-    Possibly use a DTO instead of the Model to remove the recusion problem
-    Create a DTO 
+    CurrencyDto is a full reflection of the Model (Remove the ID maybe)
+    Custom Exceptions for the Add miles service so when flag is true it can throw the exception.
+    Add all the sequences to the Models ID
+    

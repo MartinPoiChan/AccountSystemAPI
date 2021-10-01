@@ -71,7 +71,7 @@ public class MemberAccount implements Serializable{
         return currencyId;
     }
 
-    @OneToMany(targetEntity = MemberAccountTransaction.class, fetch = FetchType.LAZY, mappedBy = "accountId", orphanRemoval = true, cascade = CascadeType.ALL)
+    @OneToMany(targetEntity = MemberAccountTransaction.class, fetch = FetchType.LAZY, mappedBy = "accountId", cascade = CascadeType.ALL)
     @JsonIgnore
     public Set<MemberAccountTransaction> getMemberAccountTransactions(){
         return memberAccountTransactions;

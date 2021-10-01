@@ -11,4 +11,7 @@ public interface PartnerRepository extends JpaRepository<Partner, Long> {
     @Query(value = "SELECT * FROM hr.PARTNER WHERE PARTNER_ID = :id", nativeQuery = true)
     Partner getOne(long id);
 
+    @Query(value = "SELECT * FROM hr.PARTNER WHERE PARTNER_ID = 2", nativeQuery = true)
+    Partner getDiscovery();
+
 }

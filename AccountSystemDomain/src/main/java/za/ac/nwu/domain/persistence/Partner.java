@@ -25,6 +25,10 @@ public class Partner implements Serializable{
         this.partnerId = partnerId;
         this.partnerName = partnerName;
     }
+    public Partner(Partner partner){
+        setPartnerId(partner.getPartnerId());
+        setPartnerName(partner.getPartnerName());
+    }
 
     public Partner(PartnerDto partnerDto) {
         setPartnerName(partnerDto.getPartnerName());
