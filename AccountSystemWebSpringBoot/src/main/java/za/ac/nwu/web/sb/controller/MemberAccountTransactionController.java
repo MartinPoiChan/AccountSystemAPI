@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import za.ac.nwu.domain.dto.MemberAccountTransactionAdditionCreateDto;
 import za.ac.nwu.domain.dto.MemberAccountTransactionCreateDto;
 import za.ac.nwu.domain.dto.MemberAccountTransactionDto;
+import za.ac.nwu.domain.exceptions.CustomExceptionAdd;
 import za.ac.nwu.domain.service.GeneralResponse;
 import za.ac.nwu.logic.flow.MemberAccountTransactionService;
 
@@ -66,9 +67,11 @@ public class MemberAccountTransactionController {
 
     public ResponseEntity<GeneralResponse<MemberAccountTransactionDto>> createAdditionTransactions(
             @ApiParam(value = "Request body to create a new Transaction", required = true)
-            @RequestBody MemberAccountTransactionAdditionCreateDto transaction) {
-        MemberAccountTransactionDto transactions = memberAccountTransactionService.createAdditionTransactions(transaction, true);
-        GeneralResponse<MemberAccountTransactionDto> response = new GeneralResponse<>(true, transactions);
-        return new ResponseEntity<>(response, HttpStatus.OK);
+            @RequestBody MemberAccountTransactionAdditionCreateDto transaction){
+            boolean successful;
+            MemberAccountTransactionDto transactions = memberAccountTransactionService.createAdditionTransactions(transaction);
+            successful = true;
+            GeneralResponse<MemberAccountTransactionDto> response = new GeneralResponse<>(successful, transactions);
+            return new ResponseEntity<>(response, HttpStatus.OK);
     }
 }

@@ -5,12 +5,11 @@ import org.springframework.stereotype.Component;
 import za.ac.nwu.domain.dto.MemberAccountTransactionAdditionCreateDto;
 import za.ac.nwu.domain.dto.MemberAccountTransactionCreateDto;
 import za.ac.nwu.domain.dto.MemberAccountTransactionDto;
-import za.ac.nwu.domain.dto.PartnerDto;
+import za.ac.nwu.domain.exceptions.CustomExceptionAdd;
 import za.ac.nwu.domain.persistence.MemberAccount;
 import za.ac.nwu.domain.persistence.MemberAccountTransaction;
 import za.ac.nwu.domain.persistence.Partner;
 import za.ac.nwu.logic.flow.MemberAccountTransactionService;
-import za.ac.nwu.logic.flow.PartnerService;
 import za.ac.nwu.repo.persistence.MemberAccountRepository;
 import za.ac.nwu.repo.persistence.MemberAccountTransactionRepository;
 import za.ac.nwu.repo.persistence.PartnerRepository;
@@ -91,7 +90,7 @@ public class MemberAccountTransactionServiceImpl implements MemberAccountTransac
             transaction.setPartnerId(partner);
             transaction.setAccountId(memberAccount);
             transaction.setOldBalance(balance);
-            memberAccount.setMilesBalance(balance+memberAccountTransactionCreateDto.getAmount());
+            memberAccount.setMilesBalance(balance-memberAccountTransactionCreateDto.getAmount());
             memberAccount = memberAccountRepository.save(memberAccount);
             transaction = memberAccountTransactionRepository.save(transaction);
 
@@ -103,9 +102,12 @@ public class MemberAccountTransactionServiceImpl implements MemberAccountTransac
     }
 
     @Override
-    public MemberAccountTransactionDto createAdditionTransactions(MemberAccountTransactionAdditionCreateDto memberAccountTransactionAdditionCreateDto, boolean flag){
+    public MemberAccountTransactionDto createAdditionTransactions(MemberAccountTransactionAdditionCreateDto memberAccountTransactionAdditionCreateDto) {
         MemberAccountTransaction transaction;
+        boolean flag = memberAccountTransactionAdditionCreateDto.isFlag();
         try{
+            if (flag)
+                throw new CustomExceptionAdd();                   
             if(null == memberAccountTransactionAdditionCreateDto.getTransactionDate())
                 memberAccountTransactionAdditionCreateDto.setTransactionDate(LocalDate.now());
 
@@ -124,7 +126,9 @@ public class MemberAccountTransactionServiceImpl implements MemberAccountTransac
 
             return new MemberAccountTransactionDto(transaction);
         }
-        catch (Exception e){
+        catch (CustomExceptionAdd e){
+            if(flag)
+                throw new RuntimeException("This was flagged by the user", e);
             throw new RuntimeException("Unable to read to DB", e);
         }
     }

@@ -40,7 +40,7 @@ public class CurrencyController {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
-    @PostMapping("")
+    @PostMapping("/createCurrency")
     @ApiOperation(value = "Echo the Ping.", notes = "This echo the ping back to the client")
     @ApiResponses(value = {
             @ApiResponse(code = 201, message = "The Currency was added successfully", response = GeneralResponse.class),
@@ -58,7 +58,7 @@ public class CurrencyController {
             return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
 
-    @GetMapping("getFiat/{id}")
+    @GetMapping("oneCurrency/{id}")
     @ApiOperation(value = "Echo the Ping.", notes = "This echo the ping back to the client")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "The Currency", response = GeneralResponse.class),

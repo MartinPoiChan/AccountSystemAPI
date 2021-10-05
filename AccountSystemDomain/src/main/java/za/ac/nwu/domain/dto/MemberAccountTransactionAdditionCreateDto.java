@@ -16,6 +16,7 @@ public class MemberAccountTransactionAdditionCreateDto implements Serializable {
     private LocalDate transactionDate;
     private long oldBalance;
     private long amount;
+    private boolean flag;
 
     public MemberAccountTransactionAdditionCreateDto(long accountId, LocalDate transactionDate, long oldBalance, long amount) {
         this.accountId = accountId;
@@ -77,6 +78,21 @@ public class MemberAccountTransactionAdditionCreateDto implements Serializable {
         return amount;
     }
 
+
+    @ApiModelProperty(
+            position = 4,
+            value = "Transaction Throw",
+            name = "Flag",
+            notes = "Will throw exception if true",
+            dataType = "java.lang.Boolean",
+            example = "True",
+            allowEmptyValue = false,
+            required = true)
+    public boolean isFlag() {
+        return flag;
+    }
+
+
     //endregion
 
     //region Mutator
@@ -95,6 +111,10 @@ public class MemberAccountTransactionAdditionCreateDto implements Serializable {
 
     public void setAmount(long amount) {
         this.amount = amount;
+    }
+
+    public void setFlag(boolean flag) {
+        this.flag = flag;
     }
 
     //endregion
