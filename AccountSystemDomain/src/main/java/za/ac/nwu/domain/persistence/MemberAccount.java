@@ -40,6 +40,14 @@ public class MemberAccount implements Serializable{
         this.setCurrencyId(memberAccountDto.getCurrencyId());
     }
 
+    public MemberAccount(MemberAccount memberAccount) {
+        this.setAccountId(memberAccount.getAccountId());
+        this.setMemberId(memberAccount.getMemberId());
+        this.setMilesBalance(memberAccount.getMilesBalance());
+        this.setPlays(memberAccount.getPlays());
+        this.setCurrencyId(memberAccount.getCurrencyId());
+    }
+
     //region Accessor
     @Id
     @Column(name="ACCOUNT_ID")

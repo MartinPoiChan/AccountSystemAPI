@@ -40,10 +40,10 @@ public class MemberAccountServiceImpl implements MemberAccountService {
     }
 
     @Override
-    public List<MemberAccountFiatDto> getFiat(Long id) {
-        List<MemberAccountFiatDto> memberAccountFiatDtos = new ArrayList<>();
+    public MemberAccountFiatDto getFiat(Long id) {
+        MemberAccountFiatDto memberAccountFiatDtos = null;
         try {
-            memberAccountFiatDtos.add(new MemberAccountFiatDto(memberAccountRepository.getFiat(id)));
+            memberAccountFiatDtos = new MemberAccountFiatDto(memberAccountRepository.getFiat(id));
         } catch (Exception e) {
             throw new RuntimeException("Unable to read from DB", e);
         }

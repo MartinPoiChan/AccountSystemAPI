@@ -9,7 +9,6 @@ import java.time.LocalDate;
 import java.util.List;
 
 public interface MemberAccountTransactionService {
-    List<MemberAccountTransactionDto> getAllTransactions();
 
     MemberAccountTransactionDto createSubtractTransactions(MemberAccountTransactionCreateDto memberAccountTransactionCreateDto);
 

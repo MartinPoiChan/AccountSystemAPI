@@ -42,38 +42,6 @@ public class MemberAccountTransactionServiceImpl implements MemberAccountTransac
     }
 
     @Override
-    public List<MemberAccountTransactionDto> getAllTransactions(){
-        List<MemberAccountTransactionDto> memberAccountTransactionDtos = new ArrayList<>();
-        try{
-            for (MemberAccountTransaction memberAccountTransaction : memberAccountTransactionRepository.findAll()) {
-                memberAccountTransactionDtos.add(new MemberAccountTransactionDto(memberAccountTransaction));
-            }
-        }
-        catch (Exception e){
-            throw new RuntimeException("Unable to read to DB", e);
-        }
-        return memberAccountTransactionDtos;
-    }
-
-//    @Override
-//    public List<MemberAccountTransactionDto> updateRefAccount(long id){
-//        List<MemberAccountTransactionDto> memberAccountTransactionDtos = new ArrayList<>();
-//        try{
-//            MemberAccount memberAccount = new MemberAccount(memberAccountServiceImpl.getOne(id));
-//            memberAccount.setAccountId(id);
-//
-//            for (MemberAccountTransaction memberAccountTransaction : memberAccountTransactionRepository.getAllOfAccount(id)) {
-//                memberAccountTransaction.setAccountId(memberAccount);
-//                memberAccountTransactionDtos.add(new MemberAccountTransactionDto(memberAccountTransaction));
-//            }
-//        }
-//        catch (Exception e){
-//            throw new RuntimeException("Unable to read to DB", e);
-//        }
-//        return memberAccountTransactionDtos;
-//    }
-
-    @Override
     public MemberAccountTransactionDto createSubtractTransactions(MemberAccountTransactionCreateDto memberAccountTransactionCreateDto){
             MemberAccountTransaction transaction;
         try{

@@ -51,11 +51,11 @@ public class MemberAccountController {
             @ApiResponse(code = 400, message = "Bad Request", response = GeneralResponse.class),
             @ApiResponse(code = 404, message = "Not found", response = GeneralResponse.class),
             @ApiResponse(code = 500, message = "Internal Server Error", response = GeneralResponse.class)})
-    public ResponseEntity<GeneralResponse<List<MemberAccountFiatDto>>> getFiat(
+    public ResponseEntity<GeneralResponse<MemberAccountFiatDto>> getFiat(
             @ApiParam(value = "Request body to request member ID",example = "1", name = "id", required = true)
             @PathVariable("id") long id) {
-            List<MemberAccountFiatDto> memberAccountFiatDto = memberAccountService.getFiat(id);
-            GeneralResponse<List<MemberAccountFiatDto>> response = new GeneralResponse<>(true, memberAccountFiatDto);
+            MemberAccountFiatDto memberAccountFiatDto = memberAccountService.getFiat(id);
+            GeneralResponse<MemberAccountFiatDto> response = new GeneralResponse<>(true, memberAccountFiatDto);
             return new ResponseEntity<>(response, HttpStatus.OK);
     }
 

@@ -33,7 +33,6 @@ public class Currency implements Serializable{
     }
 
     public Currency(CurrencyDto currencyDto) {
-        setCurrencyId(currencyDto.getCurrencyId());
         setCurrencyName(currencyDto.getCurrencyName());
         setMilesConv(currencyDto.getMilesConv());
     }

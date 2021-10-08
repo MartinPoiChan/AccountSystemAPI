@@ -10,7 +10,7 @@ public interface MemberAccountService {
 
     MemberAccountDto getOne(long id);
 
-    List<MemberAccountFiatDto> getFiat(Long id);
+    MemberAccountFiatDto getFiat(Long id);
 
     MemberAccountDto updateCurrency(long id, long cid);
 
