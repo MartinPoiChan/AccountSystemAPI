@@ -1,5 +1,7 @@
 package za.ac.nwu.logic.flow.impl;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import za.ac.nwu.domain.dto.CurrencyDto;
@@ -18,6 +20,7 @@ import java.util.List;
 @Transactional
 @Component
 public class MemberAccountServiceImpl implements MemberAccountService {
+    private static final Logger LOGGER = LoggerFactory.getLogger(MemberAccountServiceImpl.class);
     private MemberAccountRepository memberAccountRepository;
     private CurrencyRepository currencyRepository;
 
@@ -32,8 +35,14 @@ public class MemberAccountServiceImpl implements MemberAccountService {
         MemberAccountDto memberAccountDtos;
         try {
             memberAccountDtos = new MemberAccountDto(memberAccountRepository.getOne(id));
+            if(LOGGER.isInfoEnabled()) {
+                LOGGER.info("Transaction was successful,id: {} Member Account has been fetched.",memberAccountDtos.getMemberId());
+            }
         }
         catch (Exception e){
+            if(LOGGER.isWarnEnabled()){
+                LOGGER.warn("Transaction has failed, all changes have been rolled back.");
+            }
             throw new RuntimeException("Unable to read from DB", e);
         }
         return memberAccountDtos;
@@ -44,7 +53,13 @@ public class MemberAccountServiceImpl implements MemberAccountService {
         MemberAccountFiatDto memberAccountFiatDtos = null;
         try {
             memberAccountFiatDtos = new MemberAccountFiatDto(memberAccountRepository.getFiat(id));
+            if(LOGGER.isInfoEnabled()) {
+                LOGGER.info("Transaction was successful,id: {} Member Account with fiat value has been fetched.",memberAccountFiatDtos.getMemberId());
+            }
         } catch (Exception e) {
+            if(LOGGER.isWarnEnabled()){
+                LOGGER.warn("Transaction has failed, all changes have been rolled back.");
+            }
             throw new RuntimeException("Unable to read from DB", e);
         }
         return memberAccountFiatDtos;
@@ -60,7 +75,13 @@ public class MemberAccountServiceImpl implements MemberAccountService {
             memberAccount = new MemberAccount(memberAccountDto);
             memberAccount.setAccountId(id);
             memberAccountRepository.save(memberAccount);
+            if(LOGGER.isInfoEnabled()) {
+                LOGGER.info("Transaction was successful,id: {} Member Account was saved.",memberAccount.getMemberId());
+            }
         } catch (Exception e) {
+            if(LOGGER.isWarnEnabled()){
+                LOGGER.warn("Transaction has failed, all changes have been rolled back.");
+            }
             throw new RuntimeException("Unable to read from DB", e);
         }
         return memberAccountDto;

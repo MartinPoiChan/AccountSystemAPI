@@ -1,5 +1,8 @@
 package za.ac.nwu.logic.flow.impl;
 
+import org.slf4j.ILoggerFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import za.ac.nwu.domain.dto.MemberAccountTransactionAdditionCreateDto;
@@ -22,6 +25,7 @@ import java.util.List;
 @Transactional
 @Component
 public class MemberAccountTransactionServiceImpl implements MemberAccountTransactionService {
+    private static final Logger LOGGER = LoggerFactory.getLogger(MemberAccountTransactionServiceImpl.class);
 
     private MemberAccountTransactionRepository memberAccountTransactionRepository;
     private PartnerServiceImpl partnerServiceImpl;
@@ -61,10 +65,15 @@ public class MemberAccountTransactionServiceImpl implements MemberAccountTransac
             memberAccount.setMilesBalance(balance-memberAccountTransactionCreateDto.getAmount());
             memberAccount = memberAccountRepository.save(memberAccount);
             transaction = memberAccountTransactionRepository.save(transaction);
-
+            if(LOGGER.isInfoEnabled()){
+                LOGGER.info("Transaction was successful, Miles were subtracted date: {}, id: {}, amount: {}", transaction.getTransactionDate(), memberAccount.getAccountId(), transaction.getAmount());
+            }
             return new MemberAccountTransactionDto(transaction);
         }
         catch (Exception e){
+            if(LOGGER.isWarnEnabled()){
+                LOGGER.warn("Transaction has failed, all changes have been rolled back.");
+            }
             throw new RuntimeException("Unable to read to DB", e);
         }
     }
@@ -92,9 +101,15 @@ public class MemberAccountTransactionServiceImpl implements MemberAccountTransac
             memberAccount = memberAccountRepository.save(memberAccount);
             transaction = memberAccountTransactionRepository.save(transaction);
 
+            if(LOGGER.isInfoEnabled()){
+                LOGGER.info("Transaction was successful,Miles were added date: {}, id: {}, amount: {}", transaction.getTransactionDate(), memberAccount.getAccountId(), transaction.getAmount());
+            }
             return new MemberAccountTransactionDto(transaction);
         }
         catch (CustomExceptionAdd e){
+            if(LOGGER.isWarnEnabled()){
+                LOGGER.warn("Transaction has failed, all changes have been rolled back.");
+            }
             if(flag)
                 throw new RuntimeException("This was flagged by the user", e);
             throw new RuntimeException("Unable to read to DB", e);
