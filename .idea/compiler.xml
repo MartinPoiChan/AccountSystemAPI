@@ -8,13 +8,13 @@
         <outputRelativeToContentRoot value="true" />
         <module name="AccountSystemDomain" />
         <module name="AccountSystemLogic" />
-        <module name="AccountSystemWeb" />
         <module name="AccountSystemWebSpringBoot" />
         <module name="AccountSystemRepository" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="AccountSystemTranslator" target="8" />
+      <module name="AccountSystemWeb" target="8" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">

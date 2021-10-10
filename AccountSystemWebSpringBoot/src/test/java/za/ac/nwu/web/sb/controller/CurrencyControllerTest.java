@@ -61,6 +61,10 @@ public class CurrencyControllerTest {
     }
 
     @Test
+    public void getOneCurrency1Test(){
+
+    }
+    @Test
     public void getOneCurrencyTest() throws Exception{
         String expectedResponse = "{" + "\"successful\":true," + "\"payload\":{" +"\"currencyName\":\"TEST_1\"," + "\"milesConv\":999" + "}" + "}";
         CurrencyDto currencyDtos = new CurrencyDto("TEST_1", 999);

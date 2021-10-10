@@ -39,6 +39,7 @@ public class MemberAccountTransactionAdditionCreateDto implements Serializable {
         return accountId;
     }
 
+
     @ApiModelProperty(
             position = 3,
             value = "Transaction Date",
@@ -58,7 +59,7 @@ public class MemberAccountTransactionAdditionCreateDto implements Serializable {
             name = "OldBalance",
             notes = "Balance before the transaction",
             dataType = "java.lang.Long",
-            example = "15",
+            example = "0",
             allowEmptyValue = false,
             required = true)
     public Long getOldBalance() {

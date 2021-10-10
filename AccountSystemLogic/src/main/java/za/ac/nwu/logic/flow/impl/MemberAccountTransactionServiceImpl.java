@@ -100,6 +100,7 @@ public class MemberAccountTransactionServiceImpl implements MemberAccountTransac
                 memberAccount.setPlays(memberAccount.getPlays()-1);
             memberAccount = memberAccountRepository.save(memberAccount);
             transaction = memberAccountTransactionRepository.save(transaction);
+
             if (flag)
                 throw new CustomExceptionAdd();
 

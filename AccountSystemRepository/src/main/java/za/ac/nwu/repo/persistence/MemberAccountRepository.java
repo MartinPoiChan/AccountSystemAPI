@@ -14,7 +14,6 @@ public interface MemberAccountRepository extends JpaRepository<MemberAccount, Lo
     @Query(value = "SELECT ACCOUNT_ID,MEMBER_ID,MILES_BALANCE,PLAYS,CURRENCY_ID FROM hr.MEMBER_ACCOUNT WHERE MEMBER_ID = :id", nativeQuery = true)
     MemberAccount getFiat(long id);
 
-
 }
 
 
