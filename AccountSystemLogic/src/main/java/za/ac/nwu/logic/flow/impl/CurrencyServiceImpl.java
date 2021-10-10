@@ -45,7 +45,7 @@ public class CurrencyServiceImpl implements CurrencyService {
     }
 
     @Override
-    public CurrencyDto getOne(long id) {
+    public CurrencyDto getOneCurrency(long id) {
         CurrencyDto currencyDto;
         try {
             currencyDto = new CurrencyDto(currencyRepository.getOne(id));

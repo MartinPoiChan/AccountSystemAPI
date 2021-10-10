@@ -64,7 +64,7 @@ public class CurrencyControllerTest {
     public void getOneCurrencyTest() throws Exception{
         String expectedResponse = "{" + "\"successful\":true," + "\"payload\":{" +"\"currencyName\":\"TEST_1\"," + "\"milesConv\":999" + "}" + "}";
         CurrencyDto currencyDtos = new CurrencyDto("TEST_1", 999);
-        when(currencyService.getOne(1)).thenReturn(currencyDtos);
+        when(currencyService.getOneCurrency(1)).thenReturn(currencyDtos);
 
         MvcResult mvcResult = mockMvc.perform(get((String.format("%s/%s",
                         ACCOUNT_CURRENCY_URL, "oneCurrency/1")))

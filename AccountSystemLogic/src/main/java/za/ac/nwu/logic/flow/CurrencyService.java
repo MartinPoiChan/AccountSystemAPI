@@ -7,7 +7,7 @@ import java.util.List;
 public interface CurrencyService {
     List<CurrencyDto> getAllCurrencies();
 
-    CurrencyDto getOne(long id);
+    CurrencyDto getOneCurrency(long id);
 
     CurrencyDto createCurrency(CurrencyDto currencyDto);
 }

@@ -26,7 +26,6 @@ public class CurrencyDto implements Serializable {
         this.setMilesConv(currency.getMilesConv());
     }
 
-
     //region Accessor
 
     @ApiModelProperty(

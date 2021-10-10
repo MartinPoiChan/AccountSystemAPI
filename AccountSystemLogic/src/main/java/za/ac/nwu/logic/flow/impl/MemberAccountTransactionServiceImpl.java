@@ -83,8 +83,6 @@ public class MemberAccountTransactionServiceImpl implements MemberAccountTransac
         MemberAccountTransaction transaction;
         boolean flag = memberAccountTransactionAdditionCreateDto.isFlag();
         try{
-            if (flag)
-                throw new CustomExceptionAdd();                   
             if(null == memberAccountTransactionAdditionCreateDto.getTransactionDate())
                 memberAccountTransactionAdditionCreateDto.setTransactionDate(LocalDate.now());
 
@@ -98,8 +96,12 @@ public class MemberAccountTransactionServiceImpl implements MemberAccountTransac
             transaction.setAccountId(memberAccount);
             transaction.setOldBalance(balance);
             memberAccount.setMilesBalance(balance+memberAccountTransactionAdditionCreateDto.getAmount());
+            if (memberAccount.getPlays() >=1 )
+                memberAccount.setPlays(memberAccount.getPlays()-1);
             memberAccount = memberAccountRepository.save(memberAccount);
             transaction = memberAccountTransactionRepository.save(transaction);
+            if (flag)
+                throw new CustomExceptionAdd();
 
             if(LOGGER.isInfoEnabled()){
                 LOGGER.info("Transaction was successful,Miles were added date: {}, id: {}, amount: {}", transaction.getTransactionDate(), memberAccount.getAccountId(), transaction.getAmount());
