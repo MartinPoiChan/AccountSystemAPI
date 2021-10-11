@@ -1,0 +1,21 @@
+{
+  "name": "please",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "got": "^11.8.2",
+    "mssql": "^7.2.1",
+    "pug": "^3.0.2",
+    "request": "^2.88.2",
+    "sass": "^1.38.1",
+    "tedious": "^12.0.0"
+  }
+}

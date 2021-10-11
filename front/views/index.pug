@@ -1,0 +1,40 @@
+extends components/layout
+block content
+  table
+    caption Currencies Information
+    thead
+      tr
+        th(scope='col') Name
+        th(scope='col') Conversion
+    tbody
+    each result in results
+      tr
+        td(data-label='Name') #{result.currencyName}
+        td(data-label='Conversion') #{result.milesConv}
+  hr
+  form(action='/currency-create' method= 'post')
+    h3 Create Currency
+    label
+      b Currency Name: &nbsp
+        input(type="text" name="Name" placeholder="Currency Name" autocomplete="off")
+    br
+    label
+      b Conversion: &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+        input(type="number" name="Conversion" placeholder="Conversion" autocomplete="off")
+    br
+    button.btn-submit(type='submit') 
+      p Create
+  hr
+  form(action='/update-member-account-currency' method= 'post')
+    h3 MemberAccount Currency
+    label
+      b Member ID: &nbsp
+        input(type="number" name="uid" placeholder="User ID" autocomplete="off")
+    br
+    label
+      b Currency ID: &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+        input(type="number" name="cid" placeholder="Currency ID" autocomplete="off")
+    br
+    button.btn-submit(type='submit') 
+      p Update
+    
